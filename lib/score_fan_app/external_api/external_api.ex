@@ -27,4 +27,13 @@ defmodule ScoreFan.ExternalAPI do
         {:error, reason}
     end
   end
+
+  def parse_json(json_body) do
+    case Jason.decode(json_body) do
+      {:ok, result} -> result
+      {:error, reason} ->
+        Logger.error("[#{__MODULE__}] Could not parse data as json: #{inspect(reason)}")
+      {:error, reason}
+      end
+  end
 end
