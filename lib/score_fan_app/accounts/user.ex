@@ -13,13 +13,15 @@ defmodule ScoreFan.Accounts.User do
     timestamps()
   end
 
-  @fields [:email, :is_active]
+
+  @required_fields [:email, :is_active]
+  @fields @required_fields ++ [:password, :password_updated_at]
 
   @doc false
   def changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, @fields ++ [:password])
-    |> validate_required(@fields)
+    |> cast(attrs, @fields)
+    |> validate_required(@required_fields)
     |> unique_constraint(:email)
     |> put_password_hash()
     |> put_password_updated_at()
@@ -35,14 +37,13 @@ defmodule ScoreFan.Accounts.User do
     changeset
   end
 
-  defp put_password_updated_at(changeset) do
-    case changeset do
-      %Ecto.Changeset{valid?: true, changes: %{password: _}} ->
-        dt = DateTime.utc_now() |> DateTime.truncate(:second)
-        put_change(changeset, :password_updated_at, dt)
+  defp put_password_updated_at(%Ecto.Changeset{valid?: true, changes: %{password: _}} = changeset) do
+    dt = DateTime.utc_now() |> DateTime.truncate(:second)
+    cs = put_change(changeset, :password_updated_at, dt)
+    cs
+  end
 
-      _ ->
-        changeset
-    end
+  defp put_password_updated_at(changeset) do
+    changeset
   end
 end
