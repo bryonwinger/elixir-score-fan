@@ -16,3 +16,7 @@ config :score_fan_app, ScoreFan.Repo,
   database: "score_fan_app_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+# Speed up password hashing during tests
+config :comeonin, :bcrypt_log_rounds, 4
+config :comeonin, :pbkdf2_rounds, 1
