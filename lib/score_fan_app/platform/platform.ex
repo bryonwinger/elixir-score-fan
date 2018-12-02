@@ -60,6 +60,41 @@ defmodule ScoreFan.Platform do
   end
 
   @doc """
+  Creates a conference. Raises on failure.
+
+  ## Examples
+
+      iex> create_conference!(%{field: value})
+      %Conference{}
+
+      iex> create_conference!(%{field: bad_value})
+      ** (Ecto.InvalidChangesetError)
+
+  """
+  def create_conference!(attrs \\ %{}) do
+    %Conference{}
+    |> Conference.changeset(attrs)
+    |> Repo.insert!()
+  end
+
+  @doc """
+  Gets an existing conference or creates it if it doesn't exist.
+
+  ## Examples
+
+      iex> get_or_create_conference(%{field: value})
+      {:ok, %Conference{}}
+
+      iex> get_or_create_conference(%{field: bad_value})
+      ** (Ecto.InvalidChangesetError)
+
+  """
+  def get_or_create_conference(attrs \\ %{}) do
+    lookup_attrs = Map.take(attrs, [:name])
+    Repo.get_by(Conference, lookup_attrs) || create_conference!(attrs)
+  end
+
+  @doc """
   Updates a conference.
 
   ## Examples
@@ -158,6 +193,41 @@ defmodule ScoreFan.Platform do
   end
 
   @doc """
+  Creates a division. Raises on failure.
+
+  ## Examples
+
+      iex> create_division!(%{field: value})
+      %Division{}
+
+      iex> create_division!(%{field: bad_value})
+      ** (Ecto.InvalidChangesetError)
+
+  """
+  def create_division!(attrs \\ %{}) do
+    %Division{}
+    |> Division.changeset(attrs)
+    |> Repo.insert!()
+  end
+
+  @doc """
+  Gets an existing division or creates it if it doesn't exist.
+
+  ## Examples
+
+      iex> get_or_create_division(%{field: value})
+      {:ok, %Division{}}
+
+      iex> get_or_create_division(%{field: bad_value})
+      ** (Ecto.InvalidChangesetError)
+
+  """
+  def get_or_create_division(attrs \\ %{}) do
+    lookup_attrs = Map.take(attrs, [:name])
+    Repo.get_by(Division, lookup_attrs) || create_division!(attrs)
+  end
+
+  @doc """
   Updates a division.
 
   ## Examples
@@ -222,6 +292,37 @@ defmodule ScoreFan.Platform do
   end
 
   @doc """
+  Returns the list of teams matching the given criteria.
+
+  ## Examples
+
+      iex> list_teams_by(sport_type: "BASEBALL")
+      [%Team{}, ...]
+
+  """
+  def list_teams_by(criteria) when is_list(criteria) do
+    Team
+    |> where([_team], ^criteria)
+    |> Repo.all()
+  end
+
+  # @doc """
+  # Gets a single team.
+
+  # Returns `nil` if the Team does not exist.
+
+  # ## Examples
+
+  #     iex> get_team!(123)
+  #     %Team{}
+
+  #     iex> get_team!(456)
+  #     nil
+
+  # """
+  # def get_team(id), do: Repo.get(Team, id)
+
+  @doc """
   Gets a single team.
 
   Raises `Ecto.NoResultsError` if the Team does not exist.
@@ -253,6 +354,41 @@ defmodule ScoreFan.Platform do
     %Team{}
     |> Team.changeset(attrs)
     |> Repo.insert()
+  end
+
+  @doc """
+  Creates a team. Raises on failure.
+
+  ## Examples
+
+      iex> create_team!(%{field: value})
+      %Team{}
+
+      iex> create_team!(%{field: bad_value})
+      ** (Ecto.InvalidChangesetError)
+
+  """
+  def create_team!(attrs \\ %{}) do
+    %Team{}
+    |> Team.changeset(attrs)
+    |> Repo.insert!()
+  end
+
+  @doc """
+  Gets an existing team or creates it if it doesn't exist.
+
+  ## Examples
+
+      iex> get_or_create_team(%{field: value})
+      %Team{}
+
+      iex> get_or_create_team(%{field: bad_value})
+      ** (Ecto.InvalidChangesetError)
+
+  """
+  def get_or_create_team(attrs \\ %{}) do
+    lookup_attrs = Map.take(attrs, [:name, :sport_type])
+    Repo.get_by(Team, lookup_attrs) || create_team!(attrs)
   end
 
   @doc """
