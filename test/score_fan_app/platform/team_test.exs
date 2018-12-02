@@ -6,6 +6,7 @@ defmodule ScoreFan.TeamTest do
   @valid_attrs %{
     name: "some name",
     city: "Some City",
+    sport_type: "BASEBALL",
     external_team_id: 999999,
     is_active: true
   }
@@ -13,6 +14,7 @@ defmodule ScoreFan.TeamTest do
   @invalid_attrs %{
     name: nil,
     city: nil,
+    sport_type: nil,
     external_team_id: nil,
     conference_id: nil,
     division_id: nil,
@@ -42,6 +44,7 @@ defmodule ScoreFan.TeamTest do
     assert changeset.valid?
     assert changeset.changes.name == attrs.name
     assert changeset.changes.city == attrs.city
+    assert changeset.changes.sport_type == attrs.sport_type
     assert changeset.changes.external_team_id == attrs.external_team_id
     assert changeset.changes.conference_id == attrs.conference_id
     assert changeset.changes.division_id == attrs.division_id
@@ -53,6 +56,7 @@ defmodule ScoreFan.TeamTest do
     refute changeset.valid?
     assert %{name: ["can't be blank"]} = errors_on(changeset)
     assert %{city: ["can't be blank"]} = errors_on(changeset)
+    assert %{sport_type: ["can't be blank"]} = errors_on(changeset)
     assert %{external_team_id: ["can't be blank"]} = errors_on(changeset)
     assert %{conference_id: ["can't be blank"]} = errors_on(changeset)
     assert %{division_id: ["can't be blank"]} = errors_on(changeset)
