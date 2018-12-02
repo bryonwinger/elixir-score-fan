@@ -7,7 +7,7 @@ defmodule ScoreFan.ExternalAPI.NBA do
   alias ScoreFan.ExternalAPI.NBARoutes
   alias ScoreFan.Util
 
-  def load_team_data do
+  def get_team_data do
     with {:lookup_route, route} <- {:lookup_route, NBARoutes.teams()},
          {:call_api, body} when is_binary(body) <- {:call_api, ExternalAPI.call(route)},
          {:parse_data, data} <- {:parse_data, parse_teams_from_resp_body(body)},

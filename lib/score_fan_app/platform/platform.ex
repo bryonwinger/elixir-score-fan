@@ -1,0 +1,206 @@
+defmodule ScoreFan.Platform do
+  @moduledoc """
+  The Platform context.
+  """
+
+  import Ecto.Query, warn: false
+  alias ScoreFan.Repo
+
+  alias ScoreFan.Platform.{Conference, Division, Team}
+
+  #
+  # Conferences
+  #
+
+  @doc """
+  Returns the list of conferences.
+
+  ## Examples
+
+      iex> list_conferences()
+      [%Conference{}, ...]
+
+  """
+  def list_conferences do
+    Repo.all(Conference)
+  end
+
+  @doc """
+  Gets a single conference.
+
+  Raises `Ecto.NoResultsError` if the Conference does not exist.
+
+  ## Examples
+
+      iex> get_conference!(123)
+      %Conference{}
+
+      iex> get_conference!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_conference!(id), do: Repo.get!(Conference, id)
+
+  @doc """
+  Creates a conference.
+
+  ## Examples
+
+      iex> create_conference(%{field: value})
+      {:ok, %Conference{}}
+
+      iex> create_conference(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_conference(attrs \\ %{}) do
+    %Conference{}
+    |> Conference.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a conference.
+
+  ## Examples
+
+      iex> update_conference(conference, %{field: new_value})
+      {:ok, %Conference{}}
+
+      iex> update_conference(conference, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_conference(%Conference{} = conference, attrs) do
+    conference
+    |> Conference.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a Conference.
+
+  ## Examples
+
+      iex> delete_conference(conference)
+      {:ok, %Conference{}}
+
+      iex> delete_conference(conference)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_conference(%Conference{} = conference) do
+    Repo.delete(conference)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking conference changes.
+
+  ## Examples
+
+      iex> change_conference(conference)
+      %Ecto.Changeset{source: %Conference{}}
+
+  """
+  def change_conference(%Conference{} = conference) do
+    Conference.changeset(conference, %{})
+  end
+
+  #
+  # Divisions
+  #
+
+  @doc """
+  Returns the list of divisions.
+
+  ## Examples
+
+      iex> list_divisions()
+      [%Division{}, ...]
+
+  """
+  def list_divisions do
+    Repo.all(Division)
+  end
+
+  @doc """
+  Gets a single division.
+
+  Raises `Ecto.NoResultsError` if the Division does not exist.
+
+  ## Examples
+
+      iex> get_division!(123)
+      %Division{}
+
+      iex> get_division!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_division!(id), do: Repo.get!(Division, id)
+
+  @doc """
+  Creates a division.
+
+  ## Examples
+
+      iex> create_division(%{field: value})
+      {:ok, %Division{}}
+
+      iex> create_division(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_division(attrs \\ %{}) do
+    %Division{}
+    |> Division.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a division.
+
+  ## Examples
+
+      iex> update_division(division, %{field: new_value})
+      {:ok, %Division{}}
+
+      iex> update_division(division, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_division(%Division{} = division, attrs) do
+    division
+    |> Division.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a Division.
+
+  ## Examples
+
+      iex> delete_division(division)
+      {:ok, %Division{}}
+
+      iex> delete_division(division)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_division(%Division{} = division) do
+    Repo.delete(division)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking division changes.
+
+  ## Examples
+
+      iex> change_division(division)
+      %Ecto.Changeset{source: %Division{}}
+
+  """
+  def change_division(%Division{} = division) do
+    Division.changeset(division, %{})
+  end
+end
