@@ -8,8 +8,7 @@ Open up the iex console: `ies -S mix phx.server`
 
 Look up the current teams from nba.net and load them into the database:
 ```
-team_data = ScoreFan.ExternalAPI.NBA.get_team_data()
-{:ok, teams} = ...
+ScoreFan.ExternalAPI.NBA.reload_teams()
 ```
 
 ## Boilerplate

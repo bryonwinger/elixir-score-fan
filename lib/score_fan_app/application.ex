@@ -11,9 +11,10 @@ defmodule ScoreFan.Application do
       # Start the Ecto repository
       ScoreFan.Repo,
       # Start the endpoint when the application starts
-      ScoreFanWeb.Endpoint
+      ScoreFanWeb.Endpoint,
       # Starts a worker by calling: ScoreFan.Worker.start_link(arg)
       # {ScoreFan.Worker, arg},
+      ScoreFan.SyncSupervisor
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

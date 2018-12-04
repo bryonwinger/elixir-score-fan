@@ -74,3 +74,6 @@ config :score_fan_app, ScoreFan.Repo,
   database: "score_fan_app_dev",
   hostname: "localhost",
   pool_size: 10
+
+# Job configurations
+config :score_fan_app, :sync_seconds, 10
