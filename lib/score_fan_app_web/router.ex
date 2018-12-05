@@ -17,6 +17,12 @@ defmodule ScoreFanWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/sign_in", UserController, :sign_in_new
+    post "/sign_in", UserController, :sign_in
+    get "/register", UserController, :register_new
+    get "/register/confirm/:identity_token", UserController, :confirm_registration
+    post "/register", UserController, :register
+    delete "/sign_out", UserController, :sign_out
   end
 
   # Other scopes may use custom stacks.

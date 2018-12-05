@@ -69,6 +69,3 @@ config :logger, level: :info
 # Finally import the config/prod.secret.exs which should be versioned
 # separately.
 import_config "prod.secret.exs"
-
-# Job configurations
-config :score_fan_app, :sync_seconds, 300

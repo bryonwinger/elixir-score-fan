@@ -12,4 +12,9 @@ defmodule ScoreFan.Util do
     map
     |> Enum.into(%{}, fn {k, v} -> {Macro.underscore(k), v} end)
   end
+
+  def stringify_keys(map) when is_map(map) do
+    map
+    |> Enum.into(%{}, fn {k, v} -> {to_string(k), v} end)
+  end
 end

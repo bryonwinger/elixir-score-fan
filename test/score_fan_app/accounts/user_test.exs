@@ -20,4 +20,23 @@ defmodule ScoreFan.UserTest do
     assert %{email: ["can't be blank"]} = errors_on(changeset)
     assert %{is_active: ["can't be blank"]} = errors_on(changeset)
   end
+
+  test "registration_changeset with valid attributes" do
+    attrs = %{email: "myemail@example.com", email_confirmation: "myemail@example.com", identity_token: "mytoken"}
+    changeset = User.registration_changeset(%User{}, attrs)
+    assert changeset.valid?
+    assert changeset.changes.email == attrs.email
+    assert changeset.changes.email_confirmation == attrs.email_confirmation
+    assert changeset.changes.identity_token == attrs.identity_token
+    refute is_nil(get_field(changeset, :identity_token_updated_at))
+  end
+
+  test "registration_changeset with invalid attributes" do
+    attrs = %{email: "myemail@example.com", email_confirmation: "myemail2@example.com", identity_token: nil}
+    changeset = User.registration_changeset(%User{}, attrs)
+    refute changeset.valid?
+    assert %{email_confirmation: ["does not match email"]} = errors_on(changeset)
+    assert %{identity_token: ["can't be blank"]} = errors_on(changeset)
+    assert is_nil(get_field(changeset, :identity_token_updated_at))
+  end
 end
