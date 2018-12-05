@@ -21,6 +21,8 @@
       </section>
     </header>
     <main role="main" class="container">
+      <%= link "Register", to: Routes.user_path(@conn, :register_new) %>
+      <%= link "Sign In", to: Routes.user_path(@conn, :sign_in_new) %>
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
       <%= render @view_module, @view_template, assigns %>

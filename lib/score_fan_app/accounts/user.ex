@@ -5,6 +5,7 @@ defmodule ScoreFan.Accounts.User do
 
   schema "users" do
     field :email, :string
+    field :email_confirmation, :string, virtual: true
     field :is_active, :boolean, default: false
     field :password, :string, virtual: true
     field :password_hash, :string
@@ -25,6 +26,25 @@ defmodule ScoreFan.Accounts.User do
     |> unique_constraint(:email)
     |> put_password_hash()
     |> put_password_updated_at()
+  end
+
+  def registration_changeset(%User{} = user, attrs) do
+    user
+    |> cast(attrs, [:email, :email_confirmation])
+    |> validate_required([:email, :email_confirmation])
+    |> validate_emails_match()
+    |> unique_constraint(:email)
+  end
+
+  defp validate_emails_match(
+    %Ecto.Changeset{changes: %{email: email1, email_confirmation: email2}} = changeset
+  ) do
+    if email1 == email2 do
+      changeset
+    else
+      # add_error(changeset, :email_confirmation, "doesn't match email")
+      add_error(changeset, :email, "doesn't match")
+    end
   end
 
   defp put_password_hash(

@@ -76,4 +76,4 @@ config :score_fan_app, ScoreFan.Repo,
   pool_size: 10
 
 # Job configurations
-config :score_fan_app, :sync_seconds, 10
+config :score_fan_app, :sync_seconds, 10000000

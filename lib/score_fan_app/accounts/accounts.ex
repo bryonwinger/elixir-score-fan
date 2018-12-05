@@ -101,4 +101,17 @@ defmodule ScoreFan.Accounts do
   def change_user(%User{} = user) do
     User.changeset(user, %{})
   end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking user registration changes.
+
+  ## Examples
+
+      iex> user_registration_changeset(user)
+      %Ecto.Changeset{source: %User{}}
+
+  """
+  def user_registration_changeset(attrs \\ %{}) do
+    User.registration_changeset(%User{}, attrs)
+  end
 end

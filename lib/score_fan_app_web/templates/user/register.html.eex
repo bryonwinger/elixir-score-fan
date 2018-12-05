@@ -1,0 +1,2 @@
+<h1>Register New Account</h1>
+<%= render "registration_form.html", Map.put(assigns, :action, Routes.user_path(@conn, :register)) %>
